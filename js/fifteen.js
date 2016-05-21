@@ -139,10 +139,10 @@ function findNeighbor(element){
      		up = $(element).prev().prev().prev().prev(),
 			upRight = $(up).next();
 			
-			if ( isEmptyElement(right) ){
-			swapRight(element, right);   //swap right
+			if ( isEmptyElement(right) ){	//if right element empty
+			swapRight(element, right);		//swap right
 			}
-			else if ( isEmptyElement(up) ){
+			else if ( isEmptyElement(up) ){	
 			swapUp(element, up, upRight); 
 			}	
 	}
@@ -153,12 +153,12 @@ function findNeighbor(element){
      		upLeft = up.prev(),
      		downLeft = $(element).prev();
 		
-			if ( isEmptyElement(left) ){
-			swapLeft(element, left);   //swap right
+			if ( isEmptyElement(left) ){	//if left element empty
+			swapLeft(element, left);   		//swap left
 			}
-			else if ( isEmptyElement(up) ){
+			else if ( isEmptyElement(up) ){	//if up element empty 
 
-				$(element).before(up);
+				$(element).before(up);		//swap element up
 				$(upLeft).after(element);	
 			}	
 	}
@@ -178,8 +178,8 @@ function findNeighbor(element){
 					swapRight(element,right);
 				}
 				else if ( isEmptyElement(down) ){
-				$(element).before(down); //swap up element to current position  
-				$(downLeft).after(element);			
+				$(element).before(down);			//swap element down  
+				$(downLeft).after(element);						
 				}
 	}
 	//if middle right elements are selected
@@ -202,9 +202,8 @@ function findNeighbor(element){
 				$(downLeft).after(element);	
 				}
 	}
-	
 	//if middle left elements are selected
-	else if (element === children[4] || element === children[8]){
+	else if (element === children[4] || element === children[8]){ 
 		var up = $(element).prev().prev().prev().prev(), 
 			upRight = $(up).next(),
 			left = $(element).prev(), 
@@ -233,22 +232,21 @@ function findNeighbor(element){
 			left = $(element).prev(),
 			upRight = $(up).next();
 			
-			if ( isEmptyElement(left) ){	//if left is empty
-				swapLeft(element, left);  	//swap element left
+			if ( isEmptyElement(left) ){		//if left is empty
+				swapLeft(element, left);  		//swap element left
 			}
-			else if ( isEmptyElement(up) ){	//if top element is empty
+			else if ( isEmptyElement(up) ){		//if top element is empty
 				$(element).before(up);
-				$(upRight).before(element);	//swap up element with selected
+				$(upRight).before(element);		//swap up element with selected
 			}
-			else if ( isEmptyElement(right) ){
-			swapRight(element, right);	//swap right
+			else if ( isEmptyElement(right) ){	//if right element is empty
+			swapRight(element, right);			//swap right
 			}			
 	}
 	
 	//all other elements (middle)    
 	else {
-	
-	
+		//local variables for possible positions to move to
 		var up = $(element).prev().prev().prev().prev(),
 			right = $(element).next(),
 			down = $(element).next().next().next().next(), 
@@ -257,18 +255,18 @@ function findNeighbor(element){
 			upRight = $(up).next();
 			
 			
-			if ( isEmptyElement(up) ){	//if up element empty 
-				$(element).before(up);	//swap up element 
+			if ( isEmptyElement(up) ){			//if up element empty 
+				$(element).before(up);			//swap up element 
 				$(upRight).before(element);
 			}
 			else if ( isEmptyElement(right) ){	//if right element empty
-				swapRight(element, right);	//swap right element
+				swapRight(element, right);		//swap right element
 			}
 			else if ( isEmptyElement(left) ){	//if left element empty
-				swapLeft(element, left);	//swap left element
+				swapLeft(element, left);		//swap left element
 			}
 			else if ( isEmptyElement(down) ){	//if down element empty 
-				$(element).before(down);	//swap down element
+				$(element).before(down);		//swap down element
 				$(downRight).before(element);	
 			}			
 	}
@@ -277,7 +275,7 @@ function findNeighbor(element){
 }
 
 
-
+/* helper function to determine if neighboring element has an id of "emp" */
 function isEmptyElement(element){
 			
 			if ($(element).attr("id") === "emp"){
@@ -292,8 +290,8 @@ function isEmptyElement(element){
 // }
 
 function swapUp(currentElement, upElement, currentElementTo){
-	$(currentElement).before(upElement);	//swap up element to current position  
-	$(currentElementTo).before(currentElement);	//swap current element up
+	$(currentElement).before(upElement);			//swap up element to current position  
+	$(currentElementTo).before(currentElement);		//swap current element up
 }
 
 function swapRight(currentElement, toPos){
@@ -301,11 +299,11 @@ function swapRight(currentElement, toPos){
 }
 
 function swapDown(currentElement, downElement, currentElementTo){
-	$(currentElement).before(downElement);	//swap up element to current position  
-	$(currentElementTo).before(currentElement);	//swap current element up
+	$(currentElement).before(downElement);			//swap up element to current position  
+	$(currentElementTo).before(currentElement);		//swap current element up
 }
-function swapLeft(currentElement, toPos){
-		$(toPos).before(currentElement);
+function swapLeft(currentElement, toPos){			
+		$(toPos).before(currentElement);			//swap element to the left of current element  
 }
 
 
