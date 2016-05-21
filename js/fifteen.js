@@ -7,7 +7,7 @@ window.onload = function(){
 	
 	puzzleArea = document.getElementById("puzzlearea");
 	
-	var newDiv;																	//variable to generate new div element
+	var newDiv;																			//variable to generate new div element
 	var count = 1;
 	var xBgPos = 0;
 	var yBgPos = 0; 
@@ -51,21 +51,20 @@ window.onload = function(){
 					par.style.margin = "50%"; 
 
 					newDiv.className = "puzzles";
-					newDiv.onclick = move;										//click action calls move function
+					newDiv.onclick = move;												//click action calls move function
 
 				}
 		}	
-		yBgPos -= 100; 															//decrease y coordinates for background position on next iteration
+		yBgPos -= 100; 																	//decrease y coordinates for background position on next iteration
 
 	}
 	
-	children = puzzleArea.children;												//puzzle pieces nodes list
-	$siblings = $(".puzzles").children();
+	children = puzzleArea.children;														//puzzle pieces nodes list
 	
 	/* edit empty div element */  
-	children[15].id = "emp";													//set empty div to empty
-	children[15].style.backgroundColor = "white";								//set background color to white on empty div
-	children[15].style.backgroundImage = "none";								//set background image to none on white div
+	children[15].id = "emp";															//set empty div to empty
+	children[15].style.backgroundColor = "white";										//set background color to white on empty div
+	children[15].style.backgroundImage = "none";										//set background image to none on white div
 	
 	
 	
@@ -112,10 +111,10 @@ function findNeighbor(element){
      		down = $(element).next().next().next().next(),
 			downRight = $(down).next();
 			
-			if ( isEmptyElement(right) ){				//if right element empty
-			swapRight(element, right);   				//swap right
+			if ( isEmptyElement(right) ){												//if right element empty
+			swapRight(element, right);   												//swap right
 			}
-			else if ( isEmptyElement(down) ){			//if down element empty
+			else if ( isEmptyElement(down) ){												//if down element empty
 			swapDown(element, down, downRight); 
 			}
 	}
@@ -234,15 +233,15 @@ function findNeighbor(element){
 			left = $(element).prev(),
 			upRight = $(up).next();
 			
-			if ( isEmptyElement(left) ){				//if left is empty
-				swapLeft(element, left);  				//swap element left
+			if ( isEmptyElement(left) ){												//if left is empty
+				swapLeft(element, left);  												//swap element left
 			}
-			else if ( isEmptyElement(up) ){				//if top element is empty
+			else if ( isEmptyElement(up) ){												//if top element is empty
 				$(element).before(up);
-				$(upRight).before(element);				//swap up element with selected
+				$(upRight).before(element);												//swap up element with selected
 			}
 			else if ( isEmptyElement(right) ){
-			swapRight(element, right);   //swap right
+			swapRight(element, right);   												//swap right
 			}			
 	}
 	
@@ -258,18 +257,18 @@ function findNeighbor(element){
 			upRight = $(up).next();
 			
 			
-			if ( isEmptyElement(up) ){					//if up element empty 
-				$(element).before(up);					//swap up element 
+			if ( isEmptyElement(up) ){													//if up element empty 
+				$(element).before(up);													//swap up element 
 				$(upRight).before(element);
 			}
-			else if ( isEmptyElement(right) ){			//if right element empty
-				swapRight(element, right);  			//swap right element
+			else if ( isEmptyElement(right) ){											//if right element empty
+				swapRight(element, right);  											//swap right element
 			}
-			else if ( isEmptyElement(left) ){			//if left element empty
-				swapLeft(element, left);				//swap left element
+			else if ( isEmptyElement(left) ){											//if left element empty
+				swapLeft(element, left);												//swap left element
 			}
-			else if ( isEmptyElement(down) ){			//if down element empty 
-				$(element).before(down);				//swap down element
+			else if ( isEmptyElement(down) ){											//if down element empty 
+				$(element).before(down);												//swap down element
 				$(downRight).before(element);	
 			}			
 	}
@@ -293,17 +292,17 @@ function isEmptyElement(element){
 // }
 
 function swapUp(currentElement, upElement, currentElementTo){
-	$(currentElement).before(upElement); //swap up element to current position  
-	$(currentElementTo).before(currentElement);//swap current element up
+	$(currentElement).before(upElement); 												//swap up element to current position  
+	$(currentElementTo).before(currentElement);											//swap current element up
 }
 
 function swapRight(currentElement, toPos){
-				$(currentElement).before(toPos);   //swap right
+				$(currentElement).before(toPos);   										//swap right
 }
 
 function swapDown(currentElement, downElement, currentElementTo){
-	$(currentElement).before(downElement); //swap up element to current position  
-	$(currentElementTo).before(currentElement);//swap current element up
+	$(currentElement).before(downElement); 												//swap up element to current position  
+	$(currentElementTo).before(currentElement);											//swap current element up
 }
 function swapLeft(currentElement, toPos){
 		$(toPos).before(currentElement);
