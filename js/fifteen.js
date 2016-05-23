@@ -105,14 +105,15 @@ function findNeighbor(element){
 
 	children = puzzleArea.children;
 
+var up = $(element).prevAll().eq(3) || null,	right = $(element).next() || null,
+	down = $(element).nextAll().eq(3) || null,	left = $(element).prev() || null,			
+	upRight = $(up).next() || null,				downRight = down.next() || null,
+	downLeft = $(down).prev()|| null, 			upLeft = $(up).prev() || null;
+
 	//if left corner is selected
 	switch (element) {
 	case children[0]:
-		//local variable for position of elements around current element selected
-		var right = $(element).next(),
-     		down = $(element).nextAll().eq(3),
-			downRight = $(down).next();
-			
+ 			
 			if ( isEmptyElement(right) ){	//if right element empty
 			swapRight(element, right);   	//swap right
 			}
@@ -123,10 +124,6 @@ function findNeighbor(element){
 
 	//if right corner is selected
 	case children[3]:
-		
-		var left = $(element).prev(),
-     		down = $(element).nextAll().eq(3),
-			downLeft = $(down).prev();
 		
 		if ( isEmptyElement(left) ){
 			swapLeft(element, left);   //swap right
@@ -139,10 +136,7 @@ function findNeighbor(element){
 
 	//if left bottom corner is selected
 	case children[12]:
-		var right = $(element).next(),
-     		up = $(element).prevAll().eq(3),
-			upRight = $(up).next();
-			
+		
 			if ( isEmptyElement(right) ){	//if right element empty
 			swapRight(element, right);		//swap right
 			}
@@ -153,11 +147,7 @@ function findNeighbor(element){
 
 	//if right bottom corner is selected when puzzle piece is not empty
 	case children[15]:
-		var left = $(element).prev(),
-     		up = $(element).prevAll().eq(3),
-     		upLeft = up.prev(),
-     		downLeft = $(element).prev();
-		
+	
 			if ( isEmptyElement(left) ){	//if left element empty
 				swapLeft(element, left);   		//swap left
 			}
@@ -173,13 +163,7 @@ function findNeighbor(element){
 	//if middle top elements are selected
 	case children[1]:
 	case children[2]:
-		var up = $(element).prevAll().eq(3),
-			upLeft = $(up).prev(),
-			left = $(element).prev(),
-			right = $(element).next(),
-			down = $(element).nextAll().eq(3),
-			downLeft = $(down).prev();
-		
+
 		if ( isEmptyElement(left) ){
 			swapLeft(element, left);
 			}
@@ -195,11 +179,6 @@ function findNeighbor(element){
 	//if middle right elements are selected
 	case children[7]:
 	case children[11]:
-		var up = $(element).prevAll().eq(3),
-			upLeft = $(up).prev(),
-			left = $(element).prev(),
-			down = $(element).nextAll().eq(3),
-			downLeft = $(down).prev();
 		
 		if ( isEmptyElement(up) ){
 			$(element).before(up);
@@ -217,13 +196,7 @@ function findNeighbor(element){
 	//if middle left elements are selected
 	case children[4]:
 	case children[8]: 
-		var up = $(element).prevAll().eq(3), 
-			upRight = $(up).next(),
-			left = $(element).prev(), 
-			right = $(element).next(), 
-			down = $(element).nextAll().eq(3),
-			downLeft = $(down).prev();
-		
+	
 		if ( isEmptyElement(up) ){ 
 			$(element).before(up);
 			$(upRight).before(element);		
@@ -241,11 +214,6 @@ function findNeighbor(element){
 	//if bottom middle elements are selected
 	case children[14]:
 	case children[13]:
-		//local variables for positions
-		var up = $(element).prevAll().eq(3),
-			right = $(element).next(),
-			left = $(element).prev(),
-			upRight = $(up).next();
 			
 		if ( isEmptyElement(left) ){		//if left is empty
 			swapLeft(element, left);  		//swap element left
@@ -262,12 +230,6 @@ function findNeighbor(element){
 	//all other elements (middle)    
 	default: 
 		//local variables for possible positions to move to
-		var up = $(element).prevAll().eq(3),
-			right = $(element).next(),
-			down = $(element).nextAll().eq(3), 
-			downRight = down.next(),
-			left = $(element).prev(),
-			upRight = $(up).next();
 			
 			
 		if ( isEmptyElement(up) ){			//if up element empty 
@@ -301,8 +263,56 @@ function isEmptyElement(element){
 			}
 }
 
-// function shuffle(){
-// }
+function shuffle(element){
+children = puzzleArea.children;
+
+	//if left corner is selected
+	switch (element) {
+	case children[0]:
+		
+	break;
+
+	case children[3]:
+	
+	break;
+
+	case children[12]:
+		
+	break;
+
+	case children[15]:
+			
+	break;
+	
+	case children[1]:
+	case children[2]:
+		
+	break;
+
+	case children[7]:
+	case children[11]:
+		
+	break;
+
+	case children[4]:
+	case children[8]: 
+	
+	break;
+
+	case children[14]:
+	case children[13]:		
+			
+		
+	break;
+	
+	default: 
+			
+			
+		
+	
+	}
+
+}
 
 function swapUp(currentElement, upElement, currentElementTo){
 	
