@@ -21,39 +21,39 @@ window.onload = function(){
 	puzzleArea.style.margin = "auto";
 		
 		
-		for (var i = 0; i < 4; i++){
-			for (var j = 0; j < 4; j++){
-				newDiv = document.createElement("div");
-								
-				puzzleArea.appendChild(newDiv);		//add new div element to the DOM 
-				newDiv.style.height = "98px";	//set up height of new div element
-				newDiv.style.width= "98px";		//set up width of new div element
-				newDiv.style.border = "1px solid black";	//set up border of .5 pixels solid black
-				newDiv.id = j + "_" + i;	//declare id for the new div
-				newDiv.style.margin = "0";	//declare the margin for new div element
-				//add image
- 				newDiv.style.backgroundImage = 'url(img/mario_pict.png)'; 	//add the background image of puzzle on each div element
-  				newDiv.style.backgroundPosition = xBgPos + "px" + " " + yBgPos + "px";	//show the specified background position of x and y for each new div
-				newDiv.style.display = "inline-block";	//set puzzles to inline block
-				newDiv.style.verticalAlign = "top";		//remove space between div elements
+	for (var i = 0; i < 4; i++){
+		for (var j = 0; j < 4; j++){
+			
+			newDiv = document.createElement("div");
+						
+			puzzleArea.appendChild(newDiv);		//add new div element to the DOM 
+			newDiv.style.height = "98px";	//set up height of new div element
+			newDiv.style.width= "98px";		//set up width of new div element
+			newDiv.style.border = "1px solid black";	//set up border of .5 pixels solid black
+			newDiv.id = j + "_" + i;	//declare id for the new div
+			newDiv.style.margin = "0";	//declare the margin for new div element
+			//add image
+			newDiv.style.backgroundImage = 'url(img/mario_pict.png)'; 	//add the background image of puzzle on each div element
+			newDiv.style.backgroundPosition = xBgPos + "px" + " " + yBgPos + "px";	//show the specified background position of x and y for each new div
+			newDiv.style.display = "inline-block";	//set puzzles to inline block
+			newDiv.style.verticalAlign = "top";		//remove space between div elements
 
-				xBgPos -= 100;	//x pixels decrease for next background position iteration
+			xBgPos -= 100;	//x pixels decrease for next background position iteration
 
 				
-				
 
-			// 	add numbers to the div elements
-				if (count < 16){
-				var par = document.createElement("p"); 
-					par.innerHTML = count;
-					count++;
-					newDiv.appendChild(par);
-					par.style.margin = "50%"; 
+		// 	add numbers to the div elements
+			if (count < 16){
+			var par = document.createElement("p"); 
+				par.innerHTML = count;
+				count++;
+				newDiv.appendChild(par);
+				par.style.margin = "50%"; 
 
-					newDiv.className = "puzzles";
-					newDiv.onclick = move;	//click action calls move function
+				newDiv.className = "puzzles";
+				newDiv.onclick = move;	//click action calls move function
 
-				}
+			}
 		}	
 		yBgPos -= 100; 	//decrease y coordinates for background position on next iteration
 
@@ -68,8 +68,9 @@ window.onload = function(){
 	
 	
 	
-hover();	
-
+	hover();
+var $element = $(children[15]).next().next();
+console.log($element);
 // var shuffleButton = document.getElementById("shufflebutton");
 // shuffleButton.onclick = shuffle;
 };
@@ -105,10 +106,11 @@ function findNeighbor(element){
 	children = puzzleArea.children;
 
 	//if left corner is selected
-	if ( element === children[0] ){
+	switch (element) {
+	case children[0]:
 		//local variable for position of elements around current element selected
 		var right = $(element).next(),
-     		down = $(element).next().next().next().next(),
+     		down = $(element).nextAll().eq(3),
 			downRight = $(down).next();
 			
 			if ( isEmptyElement(right) ){	//if right element empty
@@ -117,12 +119,13 @@ function findNeighbor(element){
 			else if ( isEmptyElement(down) ){	//if down element empty
 			swapDown(element, down, downRight); 
 			}
-	}
+	break;
+
 	//if right corner is selected
-	else if ( element === children[3] ){
+	case children[3]:
 		
 		var left = $(element).prev(),
-     		down = $(element).next().next().next().next(),
+     		down = $(element).nextAll().eq(3),
 			downLeft = $(down).prev();
 		
 		if ( isEmptyElement(left) ){
@@ -132,11 +135,12 @@ function findNeighbor(element){
 				$(element).before(down);
 				$(downLeft).after(element);
 			}
-	}
+	break;
+
 	//if left bottom corner is selected
-	else if ( element === children[12] ) {
+	case children[12]:
 		var right = $(element).next(),
-     		up = $(element).prev().prev().prev().prev(),
+     		up = $(element).prevAll().eq(3),
 			upRight = $(up).next();
 			
 			if ( isEmptyElement(right) ){	//if right element empty
@@ -145,132 +149,143 @@ function findNeighbor(element){
 			else if ( isEmptyElement(up) ){	
 			swapUp(element, up, upRight); 
 			}	
-	}
+	break;
+
 	//if right bottom corner is selected when puzzle piece is not empty
-	else if ( element === children[15] ) {
+	case children[15]:
 		var left = $(element).prev(),
-     		up = $(element).prev().prev().prev().prev(),
+     		up = $(element).prevAll().eq(3),
      		upLeft = up.prev(),
      		downLeft = $(element).prev();
 		
 			if ( isEmptyElement(left) ){	//if left element empty
-			swapLeft(element, left);   		//swap left
+				swapLeft(element, left);   		//swap left
 			}
 			else if ( isEmptyElement(up) ){	//if up element empty 
 
-				$(element).before(up);		//swap element up
+				$(element).before(up);
+
+					//swap element up
 				$(upLeft).after(element);	
 			}	
-	}
+	break;
+	
 	//if middle top elements are selected
-	else if (element === children[1] || element === children[2]){
-		var up = $(element).prev().prev().prev().prev(),
+	case children[1]:
+	case children[2]:
+		var up = $(element).prevAll().eq(3),
 			upLeft = $(up).prev(),
 			left = $(element).prev(),
 			right = $(element).next(),
-			down = $(element).next().next().next().next(),
+			down = $(element).nextAll().eq(3),
 			downLeft = $(down).prev();
 		
 		if ( isEmptyElement(left) ){
-				swapLeft(element, left);
-				}
-				else if ( isEmptyElement(right) ){
-					swapRight(element,right);
-				}
-				else if ( isEmptyElement(down) ){
-				$(element).before(down);			//swap element down  
-				$(downLeft).after(element);						
-				}
-	}
-	//if middle right elements are selected
-	else if (element === children[7] || element === children[11]){
-		var up = $(element).prev().prev().prev().prev(),
-			upLeft = $(up).prev(),
-			left = $(element).prev(),
-			down = $(element).next().next().next().next(),
-			downLeft = $(down).prev();
-		
-		if ( isEmptyElement(up) ){
-					$(element).before(up);
-					$(upLeft).after(element);
-				}
-				else if ( isEmptyElement(left) ){
-					swapLeft( element, left );
-				}
-				else if ( isEmptyElement(down) ){
-				$(element).before(down);
-				$(downLeft).after(element);	
-				}
-	}
-	//if middle left elements are selected
-	else if (element === children[4] || element === children[8]){ 
-		var up = $(element).prev().prev().prev().prev(), 
-			upRight = $(up).next(),
-			left = $(element).prev(), 
-			right = $(element).next(), 
-			down = $(element).next().next().next().next(),
-			downLeft = $(down).prev();
-		
-		if ( isEmptyElement(up) ){ 
-			$(element).before(up);
-			$(upRight).before(element);		
+			swapLeft(element, left);
 			}
 			else if ( isEmptyElement(right) ){
 				swapRight(element,right);
 			}
 			else if ( isEmptyElement(down) ){
+				$(element).before(down);			//swap element down  
+				$(downLeft).after(element);						
+			}
+		break;
+
+	//if middle right elements are selected
+	case children[7]:
+	case children[11]:
+		var up = $(element).prevAll().eq(3),
+			upLeft = $(up).prev(),
+			left = $(element).prev(),
+			down = $(element).nextAll().eq(3),
+			downLeft = $(down).prev();
+		
+		if ( isEmptyElement(up) ){
+			$(element).before(up);
+			$(upLeft).after(element);
+		}
+		else if ( isEmptyElement(left) ){
+			swapLeft( element, left );
+		}
+		else if ( isEmptyElement(down) ){
+			$(element).before(down);
+			$(downLeft).after(element);	
+		}
+	break;
+
+	//if middle left elements are selected
+	case children[4]:
+	case children[8]: 
+		var up = $(element).prevAll().eq(3), 
+			upRight = $(up).next(),
+			left = $(element).prev(), 
+			right = $(element).next(), 
+			down = $(element).nextAll().eq(3),
+			downLeft = $(down).prev();
+		
+		if ( isEmptyElement(up) ){ 
+			$(element).before(up);
+			$(upRight).before(element);		
+		}
+		else if ( isEmptyElement(right) ){
+			swapRight(element,right);
+		}
+		else if ( isEmptyElement(down) ){
 			$(element).before(down); //swap up element to current position  
 			$(downLeft).after(element);			
-			}
-	}	
+		}
 	
+	break;
+
 	//if bottom middle elements are selected
-	else if (element === children[14] || element === children[13]){
+	case children[14]:
+	case children[13]:
 		//local variables for positions
-		var up = $(element).prev().prev().prev().prev(),
+		var up = $(element).prevAll().eq(3),
 			right = $(element).next(),
 			left = $(element).prev(),
 			upRight = $(up).next();
 			
-			if ( isEmptyElement(left) ){		//if left is empty
-				swapLeft(element, left);  		//swap element left
-			}
-			else if ( isEmptyElement(up) ){		//if top element is empty
-				$(element).before(up);
-				$(upRight).before(element);		//swap up element with selected
-			}
-			else if ( isEmptyElement(right) ){	//if right element is empty
+		if ( isEmptyElement(left) ){		//if left is empty
+			swapLeft(element, left);  		//swap element left
+		}
+		else if ( isEmptyElement(up) ){		//if top element is empty
+			$(element).before(up);
+			$(upRight).before(element);		//swap up element with selected
+		}
+		else if ( isEmptyElement(right) ){	//if right element is empty
 			swapRight(element, right);			//swap right
-			}			
-	}
+		}			
+	break;
 	
 	//all other elements (middle)    
-	else {
+	default: 
 		//local variables for possible positions to move to
-		var up = $(element).prev().prev().prev().prev(),
+		var up = $(element).prevAll().eq(3),
 			right = $(element).next(),
-			down = $(element).next().next().next().next(), 
+			down = $(element).nextAll().eq(3), 
 			downRight = down.next(),
 			left = $(element).prev(),
 			upRight = $(up).next();
 			
 			
-			if ( isEmptyElement(up) ){			//if up element empty 
-				$(element).before(up);			//swap up element 
-				$(upRight).before(element);
-			}
-			else if ( isEmptyElement(right) ){	//if right element empty
-				swapRight(element, right);		//swap right element
-			}
-			else if ( isEmptyElement(left) ){	//if left element empty
-				swapLeft(element, left);		//swap left element
-			}
-			else if ( isEmptyElement(down) ){	//if down element empty 
-				$(element).before(down);		//swap down element
-				$(downRight).before(element);	
-			}			
+		if ( isEmptyElement(up) ){			//if up element empty 
+			$(element).before(up);			//swap up element 
+			$(upRight).before(element);
+		}
+		else if ( isEmptyElement(right) ){	//if right element empty
+			swapRight(element, right);		//swap right element
+		}
+		else if ( isEmptyElement(left) ){	//if left element empty
+			swapLeft(element, left);		//swap left element
+		}
+		else if ( isEmptyElement(down) ){	//if down element empty 
+			$(element).before(down);		//swap down element
+			$(downRight).before(element);	
+		}			
+	
 	}
-
 					
 }
 
@@ -290,12 +305,13 @@ function isEmptyElement(element){
 // }
 
 function swapUp(currentElement, upElement, currentElementTo){
+	
 	$(currentElement).before(upElement);			//swap up element to current position  
 	$(currentElementTo).before(currentElement);		//swap current element up
 }
 
 function swapRight(currentElement, toPos){
-				$(currentElement).before(toPos);	//swap right
+	$(currentElement).before(toPos);	//swap right
 }
 
 function swapDown(currentElement, downElement, currentElementTo){
@@ -303,7 +319,7 @@ function swapDown(currentElement, downElement, currentElementTo){
 	$(currentElementTo).before(currentElement);		//swap current element up
 }
 function swapLeft(currentElement, toPos){			
-		$(toPos).before(currentElement);			//swap element to the left of current element  
+	$(toPos).before(currentElement);			//swap element to the left of current element  
 }
 
 
