@@ -3,16 +3,17 @@
 var puzzleArea;
 var children; 
 var $siblings;
+
 window.onload = function(){
 	
 	puzzleArea = document.getElementById("puzzlearea");
 	
-	var newDiv;																			//variable to generate new div element
+	var newDiv;																		//variable to generate new div element
 	var count = 1;
 	var xBgPos = 0;
 	var yBgPos = 0; 
 	
-	var shuffleButton = document.getElementById("shufflebutton");						//shuffle button
+	var shuffleButton = document.getElementById("shufflebutton");					//shuffle button
 
 
 	/* puzzle area dimensions and margin declarations */
@@ -107,53 +108,53 @@ function findNeighbor(element){
 
 	children = puzzleArea.children;
 
-var up = $(element).prevAll().eq(3) || null,	right = $(element).next() || null,
-	down = $(element).nextAll().eq(3) || null,	left = $(element).prev() || null,			
-	upRight = $(up).next() || null,				downRight = down.next() || null,
-	downLeft = $(down).prev() || null, 			upLeft = $(up).prev() || null;
+var $up = $(element).prevAll().eq(3) || null,	$right = $(element).next() || null,
+	$down = $(element).nextAll().eq(3) || null,	$left = $(element).prev() || null,			
+	$upRight = $up.next() || null,				$downRight = $down.next() || null,
+	$downLeft = $down.prev() || null, 			$upLeft = $up.prev() || null;
 
 	//if left corner is selected
 	switch (element) {
 	case children[0]:
  			
-		if ( isEmptyElement(right) ){						//if right element empty
-			swapRight(element, right);   					//swap element right
+		if ( isEmptyElement($right) ){						//if right element empty
+			swapRight(element, $right);   					//swap element right
 		}
-		else if ( isEmptyElement(down) ){					//if down element empty
-			swapDown(element, down, "before", downRight);	//swap element down
+		else if ( isEmptyElement($down) ){					//if down element empty
+			swapDown(element, $down, "before", $downRight);	//swap element down
 		}
 	break;
 
 	//if right corner is selected
 	case children[3]:
 		
-		if ( isEmptyElement(left) ){						//if left element empty			
-		swapLeft(element, left);							//swap element left 
+		if ( isEmptyElement($left) ){						//if left element empty			
+		swapLeft(element, $left);							//swap element left 
 		}
-		else if ( isEmptyElement(down) ){					//if down element empty
-			swapDown(element, down, "before", downRight);	//swap element down
+		else if ( isEmptyElement($down) ){					//if down element empty
+			swapDown(element, $down, "before", $downRight);	//swap element down
 		}
 	break;
 
 	//if left bottom corner is selected
 	case children[12]:
 	
-		if ( isEmptyElement(right) ){						//if right element empty
-			swapRight(element, right);						//swap element right
+		if ( isEmptyElement($right) ){						//if right element empty
+			swapRight(element, $right);						//swap element right
 		}
-		else if ( isEmptyElement(up) ){						//if up element empty
-			swapUp(element, up, "before", upRight); 		//swap element up
+		else if ( isEmptyElement($up) ){						//if up element empty
+			swapUp(element, $up, "before", $upRight); 		//swap element up
 		}	
 	break;
 
 	//if right bottom corner is selected when puzzle piece is not empty
 	case children[15]:
 	
-		if ( isEmptyElement(left) ){						//if left element empty
-			swapLeft(element, left);   						//swap element left
+		if ( isEmptyElement($left) ){						//if left element empty
+			swapLeft(element, $left);   						//swap element left
 		}
-		else if ( isEmptyElement(up) ){						//if up element empty 
-			swapUp(element, up, "after", upLeft);			//swap element up
+		else if ( isEmptyElement($up) ){						//if up element empty 
+			swapUp(element, $up, "after", $upLeft);			//swap element up
 		}	
 	break;
 	
@@ -161,14 +162,14 @@ var up = $(element).prevAll().eq(3) || null,	right = $(element).next() || null,
 	case children[1]:
 	case children[2]:
 
-		if ( isEmptyElement(left) ){						//if left element empty
-			swapLeft(element, left);						//swap element left
+		if ( isEmptyElement($left) ){						//if left element empty
+			swapLeft(element, $left);						//swap element left
 		}
-		else if ( isEmptyElement(right) ){					//if right element empty
-			swapRight(element,right);						//swap element down
+		else if ( isEmptyElement($right) ){					//if right element empty
+			swapRight(element, $right);						//swap element down
 		}
-		else if ( isEmptyElement(down) ){					//if down element empty	
-			swapDown(element, down, "before", downRight);	//swap element down			
+		else if ( isEmptyElement($down) ){					//if down element empty	
+			swapDown(element, $down, "before", $downRight);	//swap element down			
 			}
 		break;
 
@@ -176,15 +177,15 @@ var up = $(element).prevAll().eq(3) || null,	right = $(element).next() || null,
 	case children[7]:
 	case children[11]:
 		
-		if ( isEmptyElement(up) ){							//if top element empty
-			swapUp(element, up, "after", upLeft);			//swap element up
+		if ( isEmptyElement($up) ){							//if top element empty
+			swapUp(element, $up, "after", $upLeft);			//swap element up
 
 		}
-		else if ( isEmptyElement(left) ){					//if left element empty
-			swapLeft( element, left );						//swap element left
+		else if ( isEmptyElement($left)){					//if left element empty
+			swapLeft( element, $left );						//swap element left
 		}
-		else if ( isEmptyElement(down) ){					//if down element empty
-			swapDown(element, down, "after", downLeft); 	//swap element down
+		else if ( isEmptyElement($down) ){					//if down element empty
+			swapDown(element, $down, "after", $downLeft); 	//swap element down
 		}
 	break;
 
@@ -192,14 +193,14 @@ var up = $(element).prevAll().eq(3) || null,	right = $(element).next() || null,
 	case children[4]:
 	case children[8]: 
 	
-		if ( isEmptyElement(up) ){ 							//if top element empty
-			swapUp(element, up, "before", upRight);			//swap element up
+		if ( isEmptyElement($up) ){ 							//if top element empty
+			swapUp(element, $up, "before", $upRight);			//swap element up
 		}
-		else if ( isEmptyElement(right) ){					//if right element empty
-			swapRight(element,right);						//swap element right
+		else if ( isEmptyElement($right) ){					//if right element empty
+			swapRight(element, $right);						//swap element right
 		}
-		else if ( isEmptyElement(down) ){					//if down element empty
-			swapDown(element, down, "before", downRight);   //swap element down	
+		else if ( isEmptyElement($down) ){					//if down element empty
+			swapDown(element, $down, "before", $downRight);   //swap element down	
 		}
 	
 	break;
@@ -208,31 +209,31 @@ var up = $(element).prevAll().eq(3) || null,	right = $(element).next() || null,
 	case children[14]:
 	case children[13]:
 			
-		if ( isEmptyElement(left) ){						//if left is empty
-			swapLeft(element, left);  						//swap element left
+		if ( isEmptyElement($left) ){						//if left is empty
+			swapLeft(element, $left);  						//swap element left
 		}
-		else if ( isEmptyElement(up) ){						//if top element is empty
-			swapUp(element, up, "before", upRight);			//swap element up
+		else if ( isEmptyElement($up) ){						//if top element is empty
+			swapUp(element, $up, "before", $upRight);			//swap element up
 		}
-		else if ( isEmptyElement(right) ){					//if right element is empty
-			swapRight(element, right);						//swap right
+		else if ( isEmptyElement($right) ){					//if right element is empty
+			swapRight(element, $right);						//swap right
 		}			
 	break;
 	
 	//all other elements (middle)    
 	default: 
 		
-		if ( isEmptyElement(up) ){							//if up element empty 
-			swapUp(element, up, "before", upRight);
+		if ( isEmptyElement($up) ){							//if up element empty 
+			swapUp(element, $up, "before", $upRight);
 		}
-		else if ( isEmptyElement(right) ){					//if right element empty
-			swapRight(element, right);						//swap right element
+		else if ( isEmptyElement($right) ){					//if right element empty
+			swapRight(element, $right);						//swap right element
 		}
-		else if ( isEmptyElement(left) ){					//if left element empty
-			swapLeft(element, left);						//swap left element
+		else if ( isEmptyElement($left) ){					//if left element empty
+			swapLeft(element, $left);						//swap left element
 		}
-		else if ( isEmptyElement(down) ){					//if down element empty 
-			swapDown(element, down, "before", downRight);   //swap element down	
+		else if ( isEmptyElement($down) ){					//if down element empty 
+			swapDown(element, $down, "before", $downRight);   //swap element down	
 	
 		}			
 	
@@ -271,10 +272,10 @@ function shufflePuzzles(element){
 	//move puzzle pieces 500 times to empty square
 	while ( i < 500 ){
 		
-	var up = $(element).prevAll().eq(3) || null,	right = $(element).next() || null,
-		down = $(element).nextAll().eq(3) || null,	left = $(element).prev() || null,			
-		upRight = $(up).next() || null,				downRight = down.next() || null,
-		downLeft = $(down).prev() || null, 			upLeft = $(up).prev() || null;
+	var $up = $(element).prevAll().eq(3) || null,	$right = $(element).next() || null,
+		$down = $(element).nextAll().eq(3) || null,	$left = $(element).prev() || null,			
+		$upRight = $up.next() || null,				$downRight = $down.next() || null,
+		$downLeft = $down.prev() || null, 			$upLeft = $up.prev() || null;
 	
 		switch (element) {
 			
@@ -283,10 +284,10 @@ function shufflePuzzles(element){
 				
 				randNum = Math.floor(Math.random() * 2 + 1);		//generate random number from 1 to 2
 				if( randNum == 1 ){									//if random number == 1
-					swapRight(element, right);						//swap empty element right
+					swapRight(element, $right);						//swap empty element right
 				}
 				else {
-					swapDown(element, down, "before", downRight);	//swap empty element down   
+					swapDown(element, $down, "before", $downRight);	//swap empty element down   
 				}
 			break;
 			
@@ -295,10 +296,10 @@ function shufflePuzzles(element){
 				
 				randNum = Math.floor(Math.random() * 2 + 1);		//generate random number from 1 to 2
 				if( randNum == 1 ){									//if random number == 1
-					swapLeft(element, left);						//swap empty puzzle left
+					swapLeft(element, $left);						//swap empty puzzle left
 				}
 				else {
-					swapDown(element, down, "after", downLeft); 	//swap empty element down   
+					swapDown(element, $down, "after", $downLeft); 	//swap empty element down   
 				}
 			break;
 			
@@ -307,10 +308,10 @@ function shufflePuzzles(element){
 				
 				randNum = Math.floor(Math.random() * 2 + 1);		//generate random number from 1 to 2
 				if( randNum == 1 ){									//if random number == 1
-					swapRight(element, right);						//swap empty element right
+					swapRight(element, $right);						//swap empty element right
 				}
 				else {
-					swapUp(element, up, "before", upRight);			//swap empty element up
+					swapUp(element, $up, "before", $upRight);		//swap empty element up
 				}
 			break;
 			
@@ -319,10 +320,10 @@ function shufflePuzzles(element){
 				
 				randNum = Math.floor(Math.random() * 2 + 1);		//generate random number from 1 to 2
 				if ( randNum == 1 ){								//if random number == 1
-					swapLeft(element,left);							//swap empty puzzle left
+					swapLeft(element, $left);						//swap empty puzzle left
 				}
 				else {
-					swapUp(element, up, "after", upLeft); 			//swap empty element up
+					swapUp(element, $up, "after", $upLeft); 		//swap empty element up
 				}
 			break;
 			
@@ -332,13 +333,13 @@ function shufflePuzzles(element){
 				
 				randNum = Math.floor(Math.random() * 3 + 1);		//generate random number from 1 to 3
 				if ( randNum == 1 ){								//if random number == 1
-					swapLeft(element, left);						//swap empty puzzle left
+					swapLeft(element, $left);						//swap empty puzzle left
 				}	
 				else if ( randNum == 2 ){							//if random number == 2 
-					swapDown(element, down, "before", downRight); 	//swap empty element down
+					swapDown(element, $down, "before", $downRight); 	//swap empty element down
 				}
 				else {												//if random number == 3 
-					swapRight(element, right);						//swap empty element right
+					swapRight(element, $right);						//swap empty element right
 				}
 			break;
 			
@@ -348,13 +349,13 @@ function shufflePuzzles(element){
 				
 				randNum = Math.floor(Math.random() * 3 + 1);		//generate random number from 1 to 3
 				if ( randNum == 1 ){								//if random number == 1
-					swapUp(element, up, "after", upLeft);			//swap empty element up
+					swapUp(element, $up, "after", $upLeft);			//swap empty element up
 					}
 				else if ( randNum == 2 ){							//if random number == 2
-					swapDown(element, down, "after", downLeft);		//swap empty element down
+					swapDown(element, $down, "after", $downLeft);		//swap empty element down
 				}
 				else{												//if random number == 3
-					swapLeft(element, left);						//swap empty element left
+					swapLeft(element, $left);						//swap empty element left
 				}
 			break;
 			
@@ -363,13 +364,13 @@ function shufflePuzzles(element){
 		case children[8]: 
 			randNum = Math.floor(Math.random() * 3 + 1);			//generate random number from 1 to 3
 			if ( randNum == 1 ){									//if random number == 1
-				swapUp(element, up, "before", upRight);				//swap empty element up
+				swapUp(element, $up, "before", $upRight);				//swap empty element up
 			}
 			else if ( randNum == 2 ){								//if random number == 2
-				swapRight(element, right);							//swap empty element right
+				swapRight(element, $right);							//swap empty element right
 			}
 			else {													//if random number == 3
-				swapDown(element, down, "before", downRight);		//swap empty element down    
+				swapDown(element, $down, "before", $downRight);		//swap empty element down    
 			}
 		break;
 		
@@ -378,13 +379,13 @@ function shufflePuzzles(element){
 		case children[13]:		
 			randNum = Math.floor(Math.random() * 3 + 1);			//generate random number from 1 to 3
 			if ( randNum == 1 ){									//if random number == 1
-				swapUp(element, up, "before", upRight);				//swap empty element up
+				swapUp(element, $up, "before", $upRight);				//swap empty element up
 			}
 			else if ( randNum == 2 ){								//if random number == 2
-				swapRight(element, right);							//swap empty element right
+				swapRight(element, $right);							//swap empty element right
 			}
 			else {													//if random number == 3
-				swapLeft(element, left);							//swap empty element left
+				swapLeft(element, $left);							//swap empty element left
 			}		
 		
 		break;
@@ -393,13 +394,13 @@ function shufflePuzzles(element){
 		default: 
 			randNum = Math.floor(Math.random() * 3 + 1);			//generate random number from 1 to 3
 			if ( randNum == 1 ){									//if random number == 1
-				swapUp(element, up, "before", upRight);				//swap empty element up
+				swapUp(element, $up, "before", $upRight);				//swap empty element up
 			}
 			else if ( randNum == 2 ){								//if random number == 2
-				swapRight(element, right);							//swap empty element right
+				swapRight(element, $right);							//swap empty element right
 			}
 			else {													//if random number == 3
-				swapDown(element, down, "before", downRight);		//swap empty element down
+				swapDown(element, $down, "before", $downRight);		//swap empty element down
 			}	
 		}
 	
@@ -468,7 +469,9 @@ function swapLeft(currentElement, toPos){
 }
 
 
-
+// function checkIfWon(){
+// 	
+// }
 
 
 
