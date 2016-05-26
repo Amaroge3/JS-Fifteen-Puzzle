@@ -5,8 +5,13 @@ h1 {
 p {
 	text-align: center;
 }
+
 #controls {
 
 	text-align: center;
 	margin-top: 10px;
+}
+
+h1, #shufflebutton {
+	color: red;
 }
